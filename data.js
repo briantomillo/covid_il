@@ -14,8 +14,18 @@ function getStateData(url) {
       console.error('error:', error);
     };
     if (response.statusCode == 200) {
+      let updateDate = JSON.parse(body)
+      let updateDay = updateDate.LastUpdateDate.day;
+      let updateMonth = updateDate.LastUpdateDate.month;
+      let updateYear = updateDate.LastUpdateDate.year;
+
       // Add date check, ignore file unless newer
-      fs.writeFile('dataset.json', body, (error) => {
+
+      datestamp = ('0' + updateMonth).slice(-2) + ('0' + updateDay).slice(-2) + updateYear
+      filename = 'dataset-' + datestamp + '.json'
+      console.log('filename = ' + filename)
+
+      fs.writeFile(filename, body, (error) => {
         if (error) throw error;
         console.log('Data written to file');
       });
