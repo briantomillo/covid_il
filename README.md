@@ -1,1 +1,1 @@
-# covid_il
+# COVID19 Data for Illinois
